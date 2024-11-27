@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
+
+    private Animator playerAnimator;
     
     private Rigidbody2D playerRigidBody;
     private PlayerInputActions playerInput;
@@ -20,13 +22,26 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        playerRigidBody.velocity = inputVector * speed;
+        HandleMovement();
     }
-    
+
+    private void HandleMovement()
+    {
+        playerRigidBody.velocity = inputVector * speed;
+        
+        if (inputVector == Vector2.zero)
+        {
+            playerAnimator.SetBool("isMoving", false);
+            return;
+        }
+        playerAnimator.SetBool("isMoving", true);
+    }
+
     #region Setup Methods
     private void GetComponentReferences()
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
+        playerAnimator = GetComponent<Animator>();
     }
     private void InitializeInput()
     {
