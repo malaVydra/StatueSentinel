@@ -32,7 +32,6 @@ public class Inventory
             if (items[i].ItemData.ItemID != _item.ItemData.ItemID || items[i].ItemCount >= Item.MAX_STACK) continue;
                 
             items[i].AddToStack(1);
-            Debug.Log("Current number of stackable items in slot: " + items[i].ItemCount);
             ItemAddedEvent?.Invoke(items[i]);
             
             return true;
@@ -42,10 +41,24 @@ public class Inventory
     }
     public bool CanAddItem(Item _item, int _maxDifferentItems)
     {
-        if(items.Find(x => x.ItemData.ItemID == _item.ItemData.ItemID) != null)
+        //Check if inventory is full
+        if (items.Count >= _maxDifferentItems)
+        {
+            //Check if item is stackable and if there's already one in the inventory
+            if (IsItemStackableInInventory(_item)) return true;
+            
+            return false;
+        }
+        return true;
+    }
+    private bool IsItemStackableInInventory(Item _item)
+    {
+        bool canAddItem = items.Find(x => x.ItemData.ItemID == _item.ItemData.ItemID && x.CanAddToStack()) != null;
+        if (_item.ItemData.IsStackable && canAddItem)
         {
             return true;
         }
-        return items.Count < _maxDifferentItems;
+
+        return false;
     }
 }

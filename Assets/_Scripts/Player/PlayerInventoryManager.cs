@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,9 +6,12 @@ public class PlayerInventoryManager : MonoBehaviour
 {
     private Inventory playerInventory;
 
-    [SerializeField] private InventoryPanelUI inventoryPanelUI;
-    
     [SerializeField] private int numberOfSlots = 9;
+    
+    [Header("Component References")]
+    [SerializeField] private InventoryPanelUI inventoryPanelUI;
+    [SerializeField] private PlayerHoldingItem holdingItem;
+    
     private int selectedSlot;
     void Awake()
     {
@@ -16,6 +20,12 @@ public class PlayerInventoryManager : MonoBehaviour
 
         SetInventoryUI();
     }
+
+    private void Start()
+    {
+        ItemSlotUI.OnAnySlotChanged += SyncHUDWithSelectedSlot;
+    }
+
     private void Update()
     {
         UpdateSelectedSlot();
@@ -42,8 +52,16 @@ public class PlayerInventoryManager : MonoBehaviour
                 selectedSlot = 0;
             }
         }
-        inventoryPanelUI.UpdateHUD(selectedSlot);
+        
+        SyncHUDWithSelectedSlot();
     }
+
+    private void SyncHUDWithSelectedSlot()
+    {
+        inventoryPanelUI.UpdateHUD(selectedSlot);
+        holdingItem.SetHoldingItem(inventoryPanelUI.GetSelectedItem());
+    }
+
     private void SetInventoryUI()
     {
         for(int i = 0; i < numberOfSlots; i++)
@@ -68,5 +86,8 @@ public class PlayerInventoryManager : MonoBehaviour
     private void OnInventoryChanged(Item _newItem)
     {
         inventoryPanelUI.ReloadInventoryUI(_newItem);
+        inventoryPanelUI.UpdateHUD(selectedSlot);
+        
+        holdingItem.SetHoldingItem(inventoryPanelUI.GetSelectedItem());
     }
 }

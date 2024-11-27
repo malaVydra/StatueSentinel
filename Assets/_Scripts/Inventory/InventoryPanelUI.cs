@@ -69,4 +69,9 @@ public class InventoryPanelUI : MonoBehaviour
         
         slotToFill?.SetItem(_updatedItem);
     }
+
+    public Item GetSelectedItem()
+    {
+        return selectedSlot.Item ?? null;
+    }
 }

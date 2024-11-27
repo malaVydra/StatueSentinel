@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92bb3a51787ceff49b3acb355029aa33, type: 3}
   m_Name: Stone
   m_EditorClassIdentifier: 
-  itemName: 
-  itemDescription: 
-  itemSprite: {fileID: 0}
+  itemID: stone
+  itemName: Stone
+  itemDescription: Useful resouce with multiple uses!
+  itemSprite: {fileID: 21300000, guid: 6e14b1da308076646a55c218dcb1b84a, type: 3}
+  isStackable: 1
+  itemPrefab: {fileID: 0}

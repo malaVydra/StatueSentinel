@@ -34,12 +34,17 @@ public class ItemSlotIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     public void OnEndDrag(PointerEventData eventData)
     {        
         transform.SetParent(itemSlotUI.transform);
+        transform.SetSiblingIndex(0);
+        
         rectTransform.localPosition = Vector2.zero;
         image.raycastTarget = true;
     }
     public void ChangeSlot(ItemSlotUI _newItemSlotUI)
     {
+        // Reset the parent and put it under the tmp thing
         transform.SetParent(itemSlotUI.transform);
+        transform.SetSiblingIndex(0);
+        
         rectTransform.localPosition = Vector2.zero;
         image.raycastTarget = true;
         

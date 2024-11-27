@@ -19,4 +19,8 @@ public class Item
     {
         itemCount += _amount;
     }
+    public bool CanAddToStack()
+    {
+        return itemCount < MAX_STACK;
+    }
 }
