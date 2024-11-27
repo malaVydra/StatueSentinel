@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,9 +11,18 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInputActions playerInput;
     
     private Vector2 inputVector;
+
+    private void OnEnable()
+    {
+        playerInput.Player.Enable();
+    }
+    private void OnDisable()
+    {
+        playerInput.Player.Disable();
+    }
     private void Awake()
     {
-        InitializeInput();
+        playerInput = new PlayerInputActions();
         GetComponentReferences();
     }
     private void Update()
@@ -43,11 +52,5 @@ public class PlayerMovement : MonoBehaviour
         playerRigidBody = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
     }
-    private void InitializeInput()
-    {
-        playerInput = new PlayerInputActions();
-        playerInput.Player.Enable();
-    }
-
     #endregion
 }

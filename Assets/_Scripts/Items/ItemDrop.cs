@@ -37,13 +37,16 @@ public class ItemDrop : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out PlayerInventoryManager playerInventoryManager) && !beingPickedUp)
+        if (other.TryGetComponent(out PlayerInventoryManager playerInventoryManager)
+            && !beingPickedUp
+            && canPickUp
+            && playerInventoryManager.CanAddItem(item))
         {
             beingPickedUp = true;
             
             // Suck item into the player, and destroy this object after animation is completed
-            transform.DOScale(Vector2.zero, .5f).SetEase(Ease.InExpo);
-            transform.DOMove(other.transform.position, .5f).SetEase(Ease.InBack)
+            transform.DOScale(Vector2.zero, .2f).SetEase(Ease.InExpo);
+            transform.DOMove(other.transform.position, .2f).SetEase(Ease.InBack)
                 .OnComplete(() =>
                 {
                     playerInventoryManager.AddItem(item);
