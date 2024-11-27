@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
+using TMPro;
 using UnityEngine.UI;
 
-public class ItemSlotIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler
+public class ItemSlotIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    [SerializeField] private TMP_Text itemCount;
+    
     private ItemSlotUI itemSlotUI;
     private Image image;
     private RectTransform rectTransform;
@@ -18,7 +21,6 @@ public class ItemSlotIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler
     
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("Drag Begun");
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
         image.raycastTarget = false;
@@ -29,7 +31,12 @@ public class ItemSlotIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler
         Vector2 mousePosition = Input.mousePosition;
         transform.position = mousePosition;
     }
-
+    public void OnEndDrag(PointerEventData eventData)
+    {        
+        transform.SetParent(itemSlotUI.transform);
+        rectTransform.localPosition = Vector2.zero;
+        image.raycastTarget = true;
+    }
     public void ChangeSlot(ItemSlotUI _newItemSlotUI)
     {
         transform.SetParent(itemSlotUI.transform);
@@ -40,7 +47,7 @@ public class ItemSlotIconUI : MonoBehaviour, IBeginDragHandler, IDragHandler
         
         Item cachedItem = itemSlotUI.Item;
         
-        if (_newItemSlotUI.Item != null)
+        if (!_newItemSlotUI.IsEmpty())
         {
             itemSlotUI.SetItem(_newItemSlotUI.Item);
         }

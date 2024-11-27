@@ -22,6 +22,7 @@ public class PlayerInventoryManager : MonoBehaviour
     }
     private void UpdateSelectedSlot()
     {
+        // Scrolling Logic - selecting slots in HUD
         Vector2 mouseScroll = Mouse.current.scroll.ReadValue();
         if(mouseScroll.y == 0) return;
         
@@ -56,6 +57,12 @@ public class PlayerInventoryManager : MonoBehaviour
     }
     public void AddItem(Item _item)
     {
+        if (!CanAddItem(_item))
+        {
+            
+            return;
+        }
+        
         playerInventory.AddItem(_item);
     }
     private void OnInventoryChanged(Item _newItem)

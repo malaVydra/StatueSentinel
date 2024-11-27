@@ -20,7 +20,7 @@ public class ItemSlotUI : MonoBehaviour, IDropHandler
     }
     private void OnMouseEnter()
     {
-        if(item == null) return;
+        if(IsEmpty()) return;
         
         //display item info through UI
     }
@@ -58,15 +58,22 @@ public class ItemSlotUI : MonoBehaviour, IDropHandler
         itemIcon.sprite = _item.ItemData.ItemSprite;
         itemIcon.gameObject.SetActive(true);
 
-        if (_item.ItemData.IsStackable && _item.ItemCount > 1)
+        if (item.ItemData.IsStackable && item.ItemCount > 1)
         {
             itemCount.text = _item.ItemCount.ToString();   
             itemCount.gameObject.SetActive(true);
+        }
+        else
+        {
+            itemCount.text = string.Empty;
+            itemCount.gameObject.SetActive(false);
         }
     }
     public void ClearSlot()
     {
         item = null;
+        itemCount.text = string.Empty;
+        
         itemIcon.gameObject.SetActive(false);
         itemCount.gameObject.SetActive(false);
     }
@@ -75,5 +82,10 @@ public class ItemSlotUI : MonoBehaviour, IDropHandler
     {
         ItemSlotIconUI itemDropped = eventData.pointerDrag.GetComponent<ItemSlotIconUI>();
         itemDropped.ChangeSlot(this);
+    }
+
+    public bool IsEmpty()
+    {
+        return Item == null;
     }
 }

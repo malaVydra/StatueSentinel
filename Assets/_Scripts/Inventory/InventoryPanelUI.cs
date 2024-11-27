@@ -58,15 +58,15 @@ public class InventoryPanelUI : MonoBehaviour
         selectedSlot?.DeselectSlot();
         selectedSlot = itemSlots[_selectedSlot];
     }
-    public void ReloadInventoryUI(Item _newItem)
+    public void ReloadInventoryUI(Item _updatedItem)
     {
-        ItemSlotUI slotToFill = itemSlots.First(x => x.Item == null);
-        slotToFill.SetItem(_newItem);
-        
-        if (selectedSlot == null)
+        ItemSlotUI slotToFill = itemSlots.Find(x => x.Item == _updatedItem);
+
+        if (slotToFill == null)
         {
-            selectedSlot = slotToFill;
-            selectedSlot.SelectSlot();
+            slotToFill = itemSlots.FirstOrDefault(x => x.IsEmpty());
         }
+        
+        slotToFill?.SetItem(_updatedItem);
     }
 }
