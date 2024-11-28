@@ -16,8 +16,6 @@ public class ItemData : ScriptableObject
     [SerializeField][Multiline] private string itemDescription;
     [SerializeField] private Sprite itemSprite;
     [SerializeField] private bool isStackable;
-    [Space]
-    [SerializeField] private GameObject itemPrefab;
 
     [Space]
     [Header("Tool Specifics")]
@@ -30,7 +28,6 @@ public class ItemData : ScriptableObject
     public string ItemDescription => itemDescription;
     public Sprite ItemSprite => itemSprite;
     public bool IsStackable => isStackable;
-    public GameObject ItemPrefab => itemPrefab;
     
     //Get only if item is a tool
     public float ToolEfficiency => itemType == ItemType.Tool || itemType ==ItemType.Weapon ? toolEfficiency : 0;
