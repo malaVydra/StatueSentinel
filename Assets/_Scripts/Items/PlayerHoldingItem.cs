@@ -4,6 +4,7 @@ public class PlayerHoldingItem : MonoBehaviour
 {
     private Item item;
     private SpriteRenderer spriteRenderer;
+    public Item Item => item;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -12,6 +13,7 @@ public class PlayerHoldingItem : MonoBehaviour
     {
         if(_item == null)
         {
+            item = null;
             spriteRenderer.sprite = null;
             return;
         }

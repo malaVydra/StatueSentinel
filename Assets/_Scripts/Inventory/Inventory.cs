@@ -65,22 +65,40 @@ public class Inventory
     }
     public void RemoveItem(Item _item)
     {
-        for (int i = 0; i < _item.ItemCount; i++)
+        if (_item.ItemData.IsStackable)
+        {
+            HandleStackableItemRemoval(_item);
+        }
+        else
         {
             Item itemToRemove = items.First(x => x.ItemData.ItemID == _item.ItemData.ItemID);
-            int itemToRemoveRemaining = itemToRemove.ItemCount - 1;
-            
-            if (itemToRemoveRemaining > 0)
-            {
-                itemToRemove.RemoveFromStack(1);
-            }
-            else if(itemToRemoveRemaining == 0)
-            {
-                itemToRemove.RemoveFromStack(1);
-                items.Remove(itemToRemove);
-            }
-            
+            itemToRemove.RemoveFromStack(1);
             ItemRemovedEvent?.Invoke(itemToRemove);
         }
+    }
+    private void HandleStackableItemRemoval(Item _item)
+    {
+        Item itemToRemove = items.First(x => x.ItemData.ItemID == _item.ItemData.ItemID);
+        int itemToRemoveRemaining = itemToRemove.ItemCount - _item.ItemCount;
+            
+        if (itemToRemoveRemaining > 0)
+        {
+            itemToRemove.RemoveFromStack(_item.ItemCount);
+        }
+        else if(itemToRemoveRemaining == 0)
+        {
+            itemToRemove.RemoveFromStack(_item.ItemCount);
+            items.Remove(itemToRemove);
+        }
+        else
+        {
+            itemToRemove.RemoveFromStack(itemToRemove.ItemCount);
+            items.Remove(itemToRemove);
+                
+            Item removeItem = new Item(_item.ItemData, Mathf.Abs(itemToRemoveRemaining));
+            RemoveItem(removeItem);
+        }
+            
+        ItemRemovedEvent?.Invoke(itemToRemove);
     }
 }

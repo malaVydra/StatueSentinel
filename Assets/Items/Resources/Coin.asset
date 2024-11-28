@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92bb3a51787ceff49b3acb355029aa33, type: 3}
   m_Name: Coin
   m_EditorClassIdentifier: 
+  itemType: 1
+  itemID: 
   itemName: 
   itemDescription: 
   itemSprite: {fileID: 0}
+  isStackable: 0
+  itemPrefab: {fileID: 0}
+  toolEfficiency: 1

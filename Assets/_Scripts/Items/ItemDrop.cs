@@ -3,16 +3,23 @@ using DG.Tweening;
 
 public class ItemDrop : MonoBehaviour
 {
-    [SerializeField] private ItemData testingData;
+    [SerializeField] private ItemData presetData;
+    
+    private CircleCollider2D circleCollider;
+    
     private Item item;
-    private bool canPickUp = false;
     private bool beingPickedUp = false;
     
     private SpriteRenderer spriteRenderer;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        SetItem(new Item(testingData, 1));
+        circleCollider = GetComponent<CircleCollider2D>();
+        
+        if (presetData != null)
+        {
+            SetItem(new Item(presetData, 1));
+        }
     }
     
     public void SetItem(Item _item)
@@ -32,14 +39,13 @@ public class ItemDrop : MonoBehaviour
         Vector2 randomDestination = (Vector2)transform.position
                                     + new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         transform.DOMove(randomDestination, 1f).SetEase(Ease.OutBack)
-            .OnComplete(() => canPickUp = true);
+            .OnComplete(() => circleCollider.enabled = true);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out PlayerInventoryManager playerInventoryManager)
             && !beingPickedUp
-            && canPickUp
             && playerInventoryManager.CanAddItem(item))
         {
             beingPickedUp = true;

@@ -14,10 +14,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        playerInput.Player.Enable();
+        EnableMovement();
     }
     private void OnDisable()
     {
+        EnableMovement(false);
+    }
+    public void EnableMovement(bool _enable = true)
+    {
+        if (_enable)
+        {
+            playerInput.Player.Enable();
+            return;
+        }
+        
         playerInput.Player.Disable();
     }
     private void Awake()

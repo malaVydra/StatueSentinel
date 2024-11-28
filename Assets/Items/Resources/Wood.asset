@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92bb3a51787ceff49b3acb355029aa33, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
+  itemType: 1
   itemID: wood
   itemName: Wood
   itemDescription: Great resource for building walls!
   itemSprite: {fileID: -1082847153, guid: 1f70b47d1b122a24c94bccaab8f55eb7, type: 3}
   isStackable: 1
   itemPrefab: {fileID: 0}
+  toolEfficiency: 1

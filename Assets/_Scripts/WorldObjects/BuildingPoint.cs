@@ -11,28 +11,35 @@ public class BuildingPoint : MonoBehaviour, IInteractable
     }
     private void TryToBuild()
     {
-        Debug.Log("Trying to build");
-        foreach (Item resource in buildingData.RecipeList)
+        if (!HasSufficientResources()) return;
+
+        Build();
+    }
+
+    private bool HasSufficientResources()
+    {
+        foreach (Item _resource in buildingData.RecipeList)
         {
             List<Item> allRequiredItemsInInventory = 
-                playerInventoryManager.PlayerInventory.Items.FindAll(_item => _item.ItemData.ItemID == resource.ItemData.ItemID);
+                playerInventoryManager.PlayerInventory.Items.FindAll(_item => _item.ItemData.ItemID == _resource.ItemData.ItemID);
 
             int sum = 0;
             foreach (Item item in allRequiredItemsInInventory)
             {
                 sum += item.ItemCount;
-                if(sum >= resource.ItemCount) break;
+                if(sum >= _resource.ItemCount) break;
             }
             
-            if(sum < resource.ItemCount)
+            if(sum < _resource.ItemCount)
             {
-                Debug.Log("No enough resources to build this building");
-                return;
+                Debug.LogWarning("No enough resources to build this building");
+                return false;
             }
         }
 
-        Build();
+        return true;
     }
+
     private void Build()
     {
         Building building = Instantiate(buildingData.BuildingPrefab, transform.position, Quaternion.identity)
@@ -43,6 +50,8 @@ public class BuildingPoint : MonoBehaviour, IInteractable
         {
             playerInventoryManager.PlayerInventory.RemoveItem(item);
         }
+
+        gameObject.SetActive(false);
     }
     public void ShowInteractableUI()
     {

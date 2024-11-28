@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92bb3a51787ceff49b3acb355029aa33, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: 
+  itemType: 0
   itemID: axe
   itemName: Axe
   itemDescription: It's used to chop down trees!
   itemSprite: {fileID: -1770704028, guid: dc6fe2384c1c0124692bd9e65e734471, type: 3}
   isStackable: 0
   itemPrefab: {fileID: 0}
+  toolEfficiency: 3

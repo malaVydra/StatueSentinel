@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,7 +18,6 @@ public class PlayerInteractionComponent : MonoBehaviour
     {
         if (other.TryGetComponent(out IInteractable interactable))
         {
-            Debug.Log("something has entered");
             currentInteractable = interactable;
             
             interactable.ShowInteractableUI();

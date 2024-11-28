@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681a72d3f5fca1f44ab1a755f533f613, type: 3}
   m_Name: FenceDown
   m_EditorClassIdentifier: 
-  buildingID: 
-  buildingName: 
-  buildingDescription: 
-  buildingPrefab: {fileID: 0}
+  buildingID: fence_down
+  buildingName: Fence
+  buildingDescription: The fence stops the enemies from reaching the well.
+  buildingPrefab: {fileID: 10432504571751232, guid: c2021aa439b33fa41b25ba70e8396da0, type: 3}
+  _recipeList:
+  - itemData: {fileID: 11400000, guid: 89010ce734832ba47ba361b1d65c85a2, type: 2}
+    itemCount: 10

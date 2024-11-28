@@ -8,4 +8,8 @@ public class Building : MonoBehaviour
     {
         buildingPoint = _buildingPoint;
     }
+    private void OnDestroy()
+    {
+        buildingPoint.gameObject.SetActive(true);
+    }
 }
