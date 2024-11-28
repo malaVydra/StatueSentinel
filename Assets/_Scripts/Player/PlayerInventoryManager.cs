@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerInventoryManager : MonoBehaviour
 {
     private Inventory playerInventory;
+    public Inventory PlayerInventory => playerInventory;
 
     [SerializeField] private int numberOfSlots = 9;
     
@@ -16,11 +17,11 @@ public class PlayerInventoryManager : MonoBehaviour
     void Awake()
     {
         playerInventory = new Inventory();
-        playerInventory.ItemAddedEvent.AddListener(OnInventoryChanged);
-
+        playerInventory.ItemAddedEvent.AddListener(OnItemAdded);
+        playerInventory.ItemRemovedEvent.AddListener(OnItemRemoved);
+        
         SetInventoryUI();
     }
-
     private void Start()
     {
         ItemSlotUI.OnAnySlotChanged += SyncHUDWithSelectedSlot;
@@ -77,15 +78,21 @@ public class PlayerInventoryManager : MonoBehaviour
     {
         if (!CanAddItem(_item))
         {
-            
             return;
         }
         
         playerInventory.AddItem(_item);
     }
-    private void OnInventoryChanged(Item _newItem)
+    private void OnItemRemoved(Item _removedItem)
     {
-        inventoryPanelUI.ReloadInventoryUI(_newItem);
+        inventoryPanelUI.ItemRemovedUpdateUI(_removedItem);
+
+        inventoryPanelUI.UpdateHUD(selectedSlot);
+        holdingItem.SetHoldingItem(inventoryPanelUI.GetSelectedItem());
+    }
+    private void OnItemAdded(Item _newItem)
+    {
+        inventoryPanelUI.ItemAddedUpdateUI(_newItem);
         inventoryPanelUI.UpdateHUD(selectedSlot);
         
         holdingItem.SetHoldingItem(inventoryPanelUI.GetSelectedItem());

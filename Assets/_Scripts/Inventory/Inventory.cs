@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Inventory
 {
     public UnityEvent<Item> ItemAddedEvent;
+    public UnityEvent<Item> ItemRemovedEvent;
     
     private List<Item> items;
     public List<Item> Items => items;
@@ -14,6 +15,7 @@ public class Inventory
     {
         items = new List<Item>();
         ItemAddedEvent = new UnityEvent<Item>();
+        ItemRemovedEvent = new UnityEvent<Item>();
     }
     public void AddItem(Item _item)
     {
@@ -60,5 +62,25 @@ public class Inventory
         }
 
         return false;
+    }
+    public void RemoveItem(Item _item)
+    {
+        for (int i = 0; i < _item.ItemCount; i++)
+        {
+            Item itemToRemove = items.First(x => x.ItemData.ItemID == _item.ItemData.ItemID);
+            int itemToRemoveRemaining = itemToRemove.ItemCount - 1;
+            
+            if (itemToRemoveRemaining > 0)
+            {
+                itemToRemove.RemoveFromStack(1);
+            }
+            else if(itemToRemoveRemaining == 0)
+            {
+                itemToRemove.RemoveFromStack(1);
+                items.Remove(itemToRemove);
+            }
+            
+            ItemRemovedEvent?.Invoke(itemToRemove);
+        }
     }
 }
