@@ -408,7 +408,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   pauseMenu: {fileID: 25917727}
-  gameOverMenu: {fileID: 0}
+  gameOverMenu: {fileID: 847615467}
   mainMenuScene: MainMenu
 --- !u!1 &48026525
 GameObject:
