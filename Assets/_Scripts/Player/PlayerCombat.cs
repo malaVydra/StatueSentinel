@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
+    [SerializeField] private Transform player;
     [SerializeField] private PlayerHoldingItem playerHoldingItem;
     [SerializeField] private Animator weaponAnimator;
     [SerializeField] private HitboxComponent hitboxComponent;
@@ -24,6 +25,8 @@ public class PlayerCombat : MonoBehaviour
     }
     private void Update()
     {
+        transform.position = player.transform.position;
+        
         if(!canAttack) return;
         
         if (Keyboard.current.fKey.wasPressedThisFrame)

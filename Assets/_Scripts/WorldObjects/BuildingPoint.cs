@@ -5,7 +5,9 @@ public class BuildingPoint : MonoBehaviour, IInteractable
 {
     [SerializeField] private PlayerInventoryManager playerInventoryManager;
     [SerializeField] private BuildingData buildingData;
-    [SerializeField] private GameObject popUpUIPrefab;
+    [SerializeField] private GameObject popUpUIPrefab, buildingInfoPrefab;
+
+    private BuildInfoUI buildInfoUI;
     
     private bool buildingActive = false;
     public void Interact()
@@ -64,10 +66,15 @@ public class BuildingPoint : MonoBehaviour, IInteractable
     }
     public void ShowInteractableUI()
     {
-        
+        Transform parent = FindObjectOfType<Canvas>().transform;
+        buildInfoUI = Instantiate(buildingInfoPrefab, parent).GetComponent<BuildInfoUI>();
+        buildInfoUI.transform.position = Camera.main.WorldToScreenPoint((Vector2)transform.position + Vector2.up * 2);
+        buildInfoUI.SetSlots(buildingData.RecipeList);
     }
     public void HideInteractableUI()
     {
+        if(buildInfoUI == null) return;
         
+        Destroy(buildInfoUI.gameObject);
     }
 }

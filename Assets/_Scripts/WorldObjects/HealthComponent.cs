@@ -16,6 +16,10 @@ public class HealthComponent : MonoBehaviour
         {
             HealthLost?.Invoke();
         }
+        else if(health > maxHealth)
+        {
+            health = maxHealth;
+        }
     }
     private void Awake()
     {

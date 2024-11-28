@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
-
+using System.Threading.Tasks;
 public class PlayerHoldingItem : MonoBehaviour
 {
     public Action<Item> HoldingItemChanged;
@@ -9,8 +8,11 @@ public class PlayerHoldingItem : MonoBehaviour
     private Item item;
     private SpriteRenderer spriteRenderer;
     public Item Item => item;
-
-    public void SetHoldingItem(Item _item)
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+    public async void SetHoldingItem(Item _item)
     {
         if (spriteRenderer == null)
         {
