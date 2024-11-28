@@ -19,4 +19,4 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 6e14b1da308076646a55c218dcb1b84a, type: 3}
   isStackable: 1
   itemPrefab: {fileID: 0}
-  toolEfficiency: 0
+  toolEfficiency: 1

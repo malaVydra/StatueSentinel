@@ -68,6 +68,8 @@ public class ResourceObject : MonoBehaviour, IDestructible
         Destroyed?.Invoke();
         
         dropComponent.Drop();
+        
+        Destroy(infoUI.gameObject);
         Destroy(gameObject);
     }
 }

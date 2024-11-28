@@ -29,14 +29,13 @@ public class PlayerCombat : MonoBehaviour
         if (Keyboard.current.fKey.wasPressedThisFrame)
         {
             weaponAnimator.SetBool("usingTool", true);
-            Debug.Log(playerHoldingItem.Item.ItemData.ToolEfficiency);
             hitboxComponent.SetActive(true, playerHoldingItem.Item.ItemData.ToolEfficiency);
         }
         else if (Keyboard.current.fKey.isPressed)
         {
             hitboxComponent.SetActive(true, playerHoldingItem.Item.ItemData.ToolEfficiency);
         }
-        else if (Keyboard.current.fKey.wasReleasedThisFrame)
+        else
         {
             DeactivateCombat();
         }

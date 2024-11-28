@@ -121,9 +121,10 @@ MonoBehaviour:
   dropTag: Drops
   dropItemPrefab: {fileID: 194953696670582315, guid: 0124d19d74cd381489225458784d3697, type: 3}
   minimumDrops: 2
-  maximumDrops: 4
+  maximumDrops: 5
   possibleDrops:
   - {fileID: 11400000, guid: 4d0aaee75198fd6428ff46b366f7f9e8, type: 2}
+  - {fileID: 11400000, guid: 924de0509d397f54aacd091d63cdfb2c, type: 2}
 --- !u!114 &7442450036739124458
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ public class BuildingPoint : MonoBehaviour, IInteractable
 {
     [SerializeField] private PlayerInventoryManager playerInventoryManager;
     [SerializeField] private BuildingData buildingData;
+    [SerializeField] private GameObject popUpUIPrefab;
     public void Interact()
     {
         TryToBuild();
@@ -33,6 +34,12 @@ public class BuildingPoint : MonoBehaviour, IInteractable
             if(sum < _resource.ItemCount)
             {
                 Debug.LogWarning("No enough resources to build this building");
+
+                Canvas parent = FindObjectOfType<Canvas>();
+                
+                Transform popUpUI = Instantiate(popUpUIPrefab, parent.transform).transform;
+                popUpUI.position = Camera.main.WorldToScreenPoint(transform.position);
+                
                 return false;
             }
         }

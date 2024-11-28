@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Metal
   m_EditorClassIdentifier: 
   itemType: 2
-  itemID: 
-  itemName: 
-  itemDescription: 
-  itemSprite: {fileID: 0}
-  isStackable: 0
+  itemID: metal
+  itemName: Metal
+  itemDescription: Sturdy resource for fixing the well!
+  itemSprite: {fileID: -1584925597, guid: dc6fe2384c1c0124692bd9e65e734471, type: 3}
+  isStackable: 1
   itemPrefab: {fileID: 0}
-  toolEfficiency: 0
+  toolEfficiency: 1
