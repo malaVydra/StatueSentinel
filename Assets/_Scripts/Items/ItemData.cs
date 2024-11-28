@@ -3,6 +3,7 @@ using UnityEngine;
 public enum ItemType
 {
     Tool,
+    Weapon,
     Resource
 }
 
@@ -23,7 +24,7 @@ public class ItemData : ScriptableObject
     [SerializeField] [Range(1f, 10f)] private float toolEfficiency;
     
     #region Public Properties
-    public ItemType ItemType => ItemType;
+    public ItemType ItemType => itemType;
     public string ItemID => itemID;
     public string ItemName => itemName;
     public string ItemDescription => itemDescription;
@@ -32,6 +33,6 @@ public class ItemData : ScriptableObject
     public GameObject ItemPrefab => itemPrefab;
     
     //Get only if item is a tool
-    public float ToolEfficiency => itemType == ItemType.Tool ? toolEfficiency : 0;
+    public float ToolEfficiency => itemType == ItemType.Tool || itemType ==ItemType.Weapon ? toolEfficiency : 0;
     #endregion
 }

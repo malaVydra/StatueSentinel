@@ -55,7 +55,6 @@ public class InventoryPanelUI : MonoBehaviour
             itemSlots[i].SetSprite(i, _selectedSlot);
         }
 
-        selectedSlot?.DeselectSlot();
         selectedSlot = itemSlots[_selectedSlot];
     }
     public void ItemAddedUpdateUI(Item _updatedItem)

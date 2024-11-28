@@ -20,7 +20,6 @@ public class PlayerDestructionComponent : MonoBehaviour
     {
         if (!ValidateDestructionConditions())
         {
-            ResetPlayerState();
             return;
         }
         HandlePlayerDestruction();
@@ -62,20 +61,19 @@ public class PlayerDestructionComponent : MonoBehaviour
             objectToDestruct.ShowDestructionUI(true);
         }
     }
-    private void OnDestroy()
-    {
-        playerMovement.EnableMovement();
-    }
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.TryGetComponent(out IDestructible _))
         {
-            if(objectToDestruct == null) return;
+            if (ValidateDestructionConditions())
+            {
+                ResetPlayerState();
+            }
             
-            objectToDestruct.ShowDestructionUI(false);
+            objectToDestruct?.ShowDestructionUI(false);
+            
             canDestruct = false;
             objectToDestruct = null;
-            ResetPlayerState();
         }
     }
     private void ResetPlayerState()

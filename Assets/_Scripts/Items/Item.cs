@@ -26,4 +26,8 @@ public class Item
     {
         return itemCount < MAX_STACK;
     }
+    public bool CompareItemType(ItemType _type)
+    {
+        return itemData.ItemType == _type;
+    }
 }

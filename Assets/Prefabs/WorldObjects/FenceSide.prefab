@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4340558766303096822}
   - component: {fileID: 7880653459725075870}
   - component: {fileID: 6281044890008004111}
+  - component: {fileID: 115434012348953185}
+  - component: {fileID: 7581972387387147858}
   m_Layer: 0
   m_Name: FenceSide
   m_TagString: Untagged
@@ -217,3 +219,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19eba123a9b55e845b4674c5b504449a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &115434012348953185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10432504571751232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57512347d630c5c4bbcc97ba5835ae96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hurtboxLayer: 1
+  flashMaterial: {fileID: 2100000, guid: bdef7b3f63c7ef14aba04b59d5e63027, type: 2}
+  defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!114 &7581972387387147858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10432504571751232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33d6fcfb0694224fb516af9d3eac968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthLost:
+    m_PersistentCalls:
+      m_Calls: []
+  maxHealth: 10

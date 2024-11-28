@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 using System;
 
@@ -37,17 +36,6 @@ public class ItemSlotUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
 		
 		itemInfoPanel.HideItemInfo();
 	}
-	
-	#region Slot Selection and Deselection
-	public void SelectSlot()
-	{
-		//item in the slot is selected
-	}
-	public void DeselectSlot()
-	{
-		//item in the slot is deselected
-	}
-	#endregion
 	
 	public void SetSprite(int _index, int _selectedSlot = 0)
 	{

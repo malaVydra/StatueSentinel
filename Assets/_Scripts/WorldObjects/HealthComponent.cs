@@ -7,11 +7,11 @@ public class HealthComponent : MonoBehaviour
     
     [SerializeField] private float maxHealth;
     private float health;
-    public float Health => health;
 
     public void ChangeHealth(float _amount)
     {
         health += _amount;
+        Debug.Log($"Health of {transform.name}: " + health);
 
         if (health <= 0)
         {
