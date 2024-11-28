@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private string mainMenuScene;
 
     private void Awake()
@@ -49,10 +50,14 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         Debug.Log("Game Saved");
         GameSave?.Invoke();
+        MainMenu();
+    }
+    public void MainMenu()
+    {
         SceneManager.LoadScene(mainMenuScene);
     }
     public void GameOver()
     {
-        //Show game over screen
+        gameOverMenu.SetActive(true);
     }
 }
