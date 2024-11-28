@@ -17,14 +17,37 @@ public class PlayerInventoryManager : MonoBehaviour
     void Awake()
     {
         playerInventory = new Inventory();
+
         playerInventory.ItemAddedEvent.AddListener(OnItemAdded);
         playerInventory.ItemRemovedEvent.AddListener(OnItemRemoved);
         
+        GameManager.Instance.GameSave.AddListener(SaveInventory);
+        
         SetInventoryUI();
+
+        LoadInventory();
     }
+
+    private void LoadInventory()
+    {
+        if (SavingManager.LoadInventoryAtStart)
+        {
+            foreach (Item item in SavingManager.Instance.LoadInventory(playerInventory))
+            {
+                playerInventory.AddItem(item);
+            }
+        }
+    }
+
     private void Start()
     {
         ItemSlotUI.OnAnySlotChanged += SyncHUDWithSelectedSlot;
+        GameManager.Instance.GameSave.AddListener(SaveInventory);
+    }
+
+    private void SaveInventory()
+    {
+        SavingManager.Instance.SaveInventory(playerInventory);
     }
 
     private void Update()

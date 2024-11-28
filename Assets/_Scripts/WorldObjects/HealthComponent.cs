@@ -21,4 +21,8 @@ public class HealthComponent : MonoBehaviour
     {
         health = maxHealth;
     }
+    public void SetHealth(float loadWellHealth)
+    {
+        health = loadWellHealth;
+    }
 }

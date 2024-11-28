@@ -6,6 +6,8 @@ public class BuildingPoint : MonoBehaviour, IInteractable
     [SerializeField] private PlayerInventoryManager playerInventoryManager;
     [SerializeField] private BuildingData buildingData;
     [SerializeField] private GameObject popUpUIPrefab;
+    
+    private bool buildingActive = false;
     public void Interact()
     {
         TryToBuild();
@@ -39,7 +41,7 @@ public class BuildingPoint : MonoBehaviour, IInteractable
                 
                 Transform popUpUI = Instantiate(popUpUIPrefab, parent.transform).transform;
                 popUpUI.position = Camera.main.WorldToScreenPoint(transform.position);
-                
+                popUpUI.transform.SetSiblingIndex(0);
                 return false;
             }
         }

@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class Inventory
 {
-    public UnityEvent<Item> ItemAddedEvent;
-    public UnityEvent<Item> ItemRemovedEvent;
+    public UnityEvent<Item> ItemAddedEvent = new UnityEvent<Item>();
+    public UnityEvent<Item> ItemRemovedEvent = new UnityEvent<Item>();
     
     private List<Item> items;
     public List<Item> Items => items;

@@ -9,12 +9,14 @@ public class PlayerHoldingItem : MonoBehaviour
     private Item item;
     private SpriteRenderer spriteRenderer;
     public Item Item => item;
-    private void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
+
     public void SetHoldingItem(Item _item)
     {
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
         if (_item == item) return;
         
         if(_item != null)

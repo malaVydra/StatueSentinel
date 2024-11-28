@@ -18,7 +18,6 @@ public class HurtboxComponent : MonoBehaviour
     public void TakeDamage(float _damage)
     {
         healthComponent.ChangeHealth(-_damage);
-
         StartCoroutine(FlashSprite());
     }
 

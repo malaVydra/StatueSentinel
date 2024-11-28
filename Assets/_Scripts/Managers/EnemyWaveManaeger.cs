@@ -16,9 +16,15 @@ public class EnemyWaveManaeger : MonoBehaviour
     
     private void Start()
     {
+        GameManager.Instance.GameSave.AddListener(SaveWave);
         if(TryToLoadData()) return;
 
         SetWave(1);
+    }
+
+    private void SaveWave()
+    {
+        SavingManager.Instance.SaveWave(wave);
     }
 
     private void Update()
@@ -32,7 +38,6 @@ public class EnemyWaveManaeger : MonoBehaviour
             timeToNextWave -= Time.deltaTime;
         }
     }
-
     private void StartWave()
     {
         int enemiesToSpawn = wave * 2;
@@ -41,7 +46,6 @@ public class EnemyWaveManaeger : MonoBehaviour
             SpawnEnemyOnRandomPosition();
         }
     }
-
     private void SpawnEnemyOnRandomPosition()
     {
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
@@ -75,6 +79,13 @@ public class EnemyWaveManaeger : MonoBehaviour
 
     private bool TryToLoadData()
     {
+        if (SavingManager.LoadInventoryAtStart)
+        {
+            wave = SavingManager.Instance.LoadWave();
+            SetWave(wave);
+            return true;
+        }
+        
         return false;
     }
 }

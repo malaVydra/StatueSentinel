@@ -30,6 +30,8 @@ public class ResourceObject : MonoBehaviour, IDestructible
 
                 Vector2 offset = Vector2.down;
                 infoUI.transform.position = Camera.main.WorldToScreenPoint((Vector2)transform.position + offset);
+                
+                infoUI.transform.SetSiblingIndex(0);
             }
             else
             {

@@ -31,3 +31,15 @@ public class Item
         return itemData.ItemType == _type;
     }
 }
+
+[System.Serializable]
+public struct ItemSavable
+{
+    public string ItemID;
+    public int ItemCount;
+    public ItemSavable(Item _item)
+    {
+        ItemID = _item.ItemData.ItemID;
+        ItemCount = _item.ItemCount;
+    }
+}
