@@ -8,8 +8,6 @@ public class BuildingPoint : MonoBehaviour, IInteractable
     [SerializeField] private GameObject popUpUIPrefab, buildingInfoPrefab;
 
     private BuildInfoUI buildInfoUI;
-    
-    private bool buildingActive = false;
     public void Interact()
     {
         TryToBuild();
@@ -68,7 +66,7 @@ public class BuildingPoint : MonoBehaviour, IInteractable
     {
         Transform parent = FindObjectOfType<Canvas>().transform;
         buildInfoUI = Instantiate(buildingInfoPrefab, parent).GetComponent<BuildInfoUI>();
-        buildInfoUI.transform.position = Camera.main.WorldToScreenPoint((Vector2)transform.position + Vector2.up * 2);
+        buildInfoUI.transform.position = Camera.main.WorldToScreenPoint((Vector2)transform.position + Vector2.up * 5);
         buildInfoUI.SetSlots(buildingData.RecipeList);
     }
     public void HideInteractableUI()

@@ -8,6 +8,7 @@ public class PlayerDestructionComponent : MonoBehaviour
     private Animator animator;
     private PlayerMovement playerMovement;
     
+    private bool holdingTool = false;
     private bool canDestruct = false;
     private IDestructible objectToDestruct;
 
@@ -15,7 +16,30 @@ public class PlayerDestructionComponent : MonoBehaviour
     {
         animator = holdingItem.GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
+        
+        holdingItem.HoldingItemChanged += OnHoldingItemChanged;
     }
+
+    private void OnHoldingItemChanged(Item _item)
+    {
+        if (_item == null)
+        {
+            holdingTool = false;
+            ResetPlayerState();
+            return;
+        }
+        
+        if(_item.CompareItemType(ItemType.Tool))
+        {
+            holdingTool = true;
+        }
+        else
+        {
+            holdingTool = false;
+        }
+        ResetPlayerState();
+    }
+
     private void Update()
     {
         if (!ValidateDestructionConditions())
@@ -46,8 +70,10 @@ public class PlayerDestructionComponent : MonoBehaviour
     private bool ValidateDestructionConditions()
     {
         //Condition 1
-        if (!canDestruct || objectToDestruct == null) return false;
+        if (!holdingTool) return false;
         //Condition 2
+        if (!canDestruct || objectToDestruct == null) return false;
+        //Condition 3
         if (!objectToDestruct.CanDestruct(holdingItem.Item)) return false;
 
         return true;

@@ -12,7 +12,7 @@ public class PlayerHoldingItem : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    public async void SetHoldingItem(Item _item)
+    public void SetHoldingItem(Item _item)
     {
         if (spriteRenderer == null)
         {

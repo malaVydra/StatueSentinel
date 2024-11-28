@@ -28,7 +28,7 @@ public class ResourceObject : MonoBehaviour, IDestructible
                 Canvas canvas = FindObjectOfType<Canvas>();
                 infoUI = Instantiate(destructionUIPrefab, canvas.transform).GetComponent<DestructionInfoUI>();
 
-                Vector2 offset = Vector2.down;
+                Vector2 offset = Vector2.up * 3;
                 infoUI.transform.position = Camera.main.WorldToScreenPoint((Vector2)transform.position + offset);
                 
                 infoUI.transform.SetSiblingIndex(0);
